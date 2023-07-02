@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Страница поста</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        .like-dislike {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .like-dislike button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .comments {
+            margin-top: 20px;
+            border-top: 1px solid #ccc;
+            padding-top: 20px;
+        }
+
+        .comments textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .comments input[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .comment {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .comment p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Страница поста</h1>
+    </header>
+    <main>
+        <h2>Заголовок поста</h2>
+        <p>Здесь будет содержание поста. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum mauris a lacus lacinia, eget placerat arcu vestibulum. Nullam bibendum varius est, vel ullamcorper velit. Sed sed elit nec lorem fringilla gravida.</p>
+        <p>Автор: John Doe</p>
+
+        <div class="like-dislike">
+            <button class="like-button">Нравится</button>
+            <button class="dislike-button">Не нравится</button>
+        </div>
+
+        <div class="comments">
+            <h3>Комментарии</h3>
+            <textarea placeholder="Оставить комментарий..."></textarea>
+            <input type="submit" value="Отправить">
+
+            <div class="comment">
+                <p>Пример комментария. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum mauris a lacus lacinia, eget placerat arcu vestibulum.</p>
+                <p>Автор: Jane Doe</p>
+            </div>
+
+            <!-- Дополнительные комментарии будут добавлены здесь -->
+        </div>
+    </main>
+</body>
+</html>

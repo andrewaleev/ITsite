@@ -1,0 +1,23 @@
+{% extends "webprog/base.html" %}
+
+{% block title %}Лента с постами{% endblock %}
+
+{% block content %}
+<div class="search-bar">
+    <input type="text" placeholder="Поиск...">
+    <input type="submit" value="Найти">
+</div>
+
+{% for post in posts %}
+    <article>
+        <a href="{{post.get_absolute_url}}">
+
+        <h2>{{ post.title }}</h2></a>
+
+        <p>{{ post.body|urlize }}</p>
+        <p>Автор: {{ post.author }}</p>
+    </article>
+{% empty %}
+    <p>Нет доступных постов.</p>
+{% endfor %}
+{% endblock %}

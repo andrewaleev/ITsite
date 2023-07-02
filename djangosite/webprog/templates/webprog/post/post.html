@@ -1,0 +1,20 @@
+{% extends "webprog/base.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+<article>
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.body }}</p>
+    <p>Автор: {{ post.author }}</p>
+
+<script>
+    function likePost(postId) {
+        // Логика для обработки лайка поста
+    }
+
+    function dislikePost(postId) {
+        // Логика для обработки дизлайка поста
+    }
+</script>
+{% endblock %}
