@@ -7,7 +7,11 @@ from .models import Post, Comment, MarkPost, MarkComment
 class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
 
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['author', 'post', 'created']
+    list_filter = ['created', 'updated']
+    search_fields = ['author', 'body']
 
-admin.site.register(Comment)
 admin.site.register(MarkPost)
 admin.site.register(MarkComment)

@@ -3,32 +3,6 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 
 
-class Comment(models.Model):
-    body = models.TextField()
-    author = models.ForeignKey(User,
-                               on_delete=models.CASCADE,
-                               related_name='blog_comments')
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-
-
-class MarkComment(models.Model):
-    class Mark(models.TextChoices):
-        LIKE = 'LK'
-        DISLIKE = 'DK'
-
-    mark = models.CharField(max_length=2,
-                            choices=Mark.choices
-                            )
-    author = models.ForeignKey(User,
-                               on_delete=models.CASCADE,
-                               related_name='mark_comment')
-    comment = models.ForeignKey(Comment,
-                                on_delete=models.CASCADE,
-                                related_name='user_mark_comment'
-                                )
-
-
 class Post(models.Model):
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250,
@@ -57,6 +31,45 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post,
+                             on_delete=models.CASCADE,
+                             related_name='comments')
+    body = models.TextField()
+    author = models.ForeignKey(User,
+                               on_delete=models.CASCADE,
+                               related_name='blog_comments')
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ['created']
+        indexes = [
+            models.Index(fields=['created'])
+        ]
+
+    def __str__(self):
+        return f'Comment by {self.author} on {self.post}'
+
+
+class MarkComment(models.Model):
+    class Mark(models.TextChoices):
+        LIKE = 'LK'
+        DISLIKE = 'DK'
+
+    mark = models.CharField(max_length=2,
+                            choices=Mark.choices
+                            )
+    author = models.ForeignKey(User,
+                               on_delete=models.CASCADE,
+                               related_name='mark_comment')
+    comment = models.ForeignKey(Comment,
+                                on_delete=models.CASCADE,
+                                related_name='user_mark_comment'
+                                )
 
 
 class MarkPost(models.Model):

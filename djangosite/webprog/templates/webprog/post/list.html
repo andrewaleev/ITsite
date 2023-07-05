@@ -18,6 +18,28 @@
         <p>Автор: {{ post.author }}</p>
     </article>
 {% empty %}
+
     <p>Нет доступных постов.</p>
 {% endfor %}
+<script>
+  // Получаем все элементы <article>
+  var articles = document.getElementsByTagName("article");
+
+  // Проходимся по каждому элементу <article>
+  for (var i = 0; i < articles.length; i++) {
+    var article = articles[i];
+
+    // Получаем ссылку <a> внутри каждого <article>
+    var link = article.getElementsByTagName("a")[0];
+
+    // Получаем значение атрибута href ссылки
+    var url = link.getAttribute("href");
+
+    // Добавляем обработчик события клика
+    article.addEventListener("click", function() {
+      // Перенаправляем на указанный URL
+      window.location.href = url;
+    });
+  }
+</script>
 {% endblock %}
