@@ -1,0 +1,18 @@
+{% extends "webprog/base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+ <h1>Мой кабинет</h1>
+ <p>Здесь будет информация о ваших стартерах и комментариях</p>
+{%for post in posts%}
+<article class ='post'>
+  <a href="{{post.get_absolute_url}}">
+
+        <h2>{{ post.title }}</h2></a>
+</article>
+
+{%endfor%}
+<p>
+ Welcome to your dashboard. You can <a href="{% url 'edit' %}">edit your profile</a>
+or <a href="{% url 'password_change' %}">change your password</a>.
+ </p>
+{% endblock %}

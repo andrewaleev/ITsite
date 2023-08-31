@@ -1,82 +1,41 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% block title %}{% endblock %}</title>
-    <style>
-         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-        }
-
-        h1 {
-            margin: 0;
-        }
-
-        main {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-        }
-
-        .search-bar {
-            margin-bottom: 20px;
-        }
-
-        .search-bar input[type="text"] {
-            width: 200px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .search-bar input[type="submit"] {
-            background-color: #333;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
-
-        .login-button {
-            background-color: #333;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            float: right;
-        }
-
-        article {
-            margin-bottom: 20px;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        h2 {
-            margin-top: 0;
-        }
-
-        p {
-            margin-top: 0;
-        }
-    </style>
+ <title>{% block title %}{% endblock %}</title>
+<link href="{% static 'css/base_ITsite.css' %}" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>Лента с постами</h1>
-        <button class="login-button">Войти</button>
-    </header>
-    <main>
-        {% block content %}
-        {% endblock %}
-    </main>
+ <div id="header">
+ <span class="logo">Starter</span>
+
+ <ul class="menu">
+  {% if request.user.is_authenticated %}
+ <li {% if section == "dashboard" %}class="selected"{% endif %}>
+ <a href="{% url 'webprog:dashboard' %}">Мой кабинет</a>
+ </li>
+  {%endif%}
+ <li {% if section == "list" %}class="selected"{% endif %}>
+ <a href="{% url 'webprog:post_list' %}">Лента со стартетарами</a>
+ </li>
+  {% if request.user.is_authenticated %}
+ <li {% if section == "people" %}class="selected"{% endif %}>
+ <a href="#">Пользователи</a>
+ </li>
+  {%endif%}
+ </ul>
+
+ <span class="user">
+ {% if request.user.is_authenticated %}
+ Привет {{ request.user.first_name|default:request.user.username }},
+ <a href="{% url 'logout' %}">Выйти</a>
+ {% else %}
+ <a href="{% url 'login' %}">Войти</a>
+ {% endif %}
+ </span>
+ </div>
+ <div id="content">
+ {% block content %}
+ {% endblock %}
+ </div>
 </body>
-</html>

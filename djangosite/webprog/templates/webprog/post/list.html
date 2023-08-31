@@ -3,43 +3,23 @@
 {% block title %}Лента с постами{% endblock %}
 
 {% block content %}
-<div class="search-bar">
-    <input type="text" placeholder="Поиск...">
-    <input type="submit" value="Найти">
-</div>
-
-{% for post in posts %}
-    <article>
+<!--<div class="search-bar">-->
+<!--    <input type="text" placeholder="Поиск...">-->
+<!--    <input type="submit" value="Найти">-->
+<!--</div>-->
+<div class="posts-container">
+    {% for post in posts %}
+    <article class="post">
         <a href="{{post.get_absolute_url}}">
 
-        <h2>{{ post.title }}</h2></a>
+            <h2>{{ post.title }}</h2></a>
 
-        <p>{{ post.body|urlize }}</p>
+        <p>{{ post.topic|urlize }}</p>
         <p>Автор: {{ post.author }}</p>
     </article>
-{% empty %}
+    {% empty %}
 
     <p>Нет доступных постов.</p>
-{% endfor %}
-<script>
-  // Получаем все элементы <article>
-  var articles = document.getElementsByTagName("article");
-
-  // Проходимся по каждому элементу <article>
-  for (var i = 0; i < articles.length; i++) {
-    var article = articles[i];
-
-    // Получаем ссылку <a> внутри каждого <article>
-    var link = article.getElementsByTagName("a")[0];
-
-    // Получаем значение атрибута href ссылки
-    var url = link.getAttribute("href");
-
-    // Добавляем обработчик события клика
-    article.addEventListener("click", function() {
-      // Перенаправляем на указанный URL
-      window.location.href = url;
-    });
-  }
-</script>
+    {% endfor %}
+</div>
 {% endblock %}

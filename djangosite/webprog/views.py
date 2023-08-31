@@ -1,13 +1,21 @@
 from django.shortcuts import render, get_object_or_404
-from .forms import  CommentForm
+from .forms import CommentForm
 from django.shortcuts import render
 from .models import *
 from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
 
+@login_required
+def dashboard(request):
+    posts = Post.objects.all().filter(author=request.user)
 
+    return render(request,
+    'webprog/dashboard.html',
+    {'section': 'dashboard',
+     'posts':posts})
 def post_list(request):
     posts = Post.objects.all()
-    return render(request, 'webprog/post/list.html', {'posts': posts})
+    return render(request, 'webprog/post/list.html', {'section':'list','posts': posts})
 
 
 def post(request, year, month, day, post):
